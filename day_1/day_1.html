@@ -13982,26 +13982,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Challenge">Challenge<a class="anchor-link" href="#Challenge">&#182;</a></h2><p>--- Day 1: Sonar Sweep ---</p>
-<p>You're minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!</p>
-<p>Before you know it, you're inside a submarine the Elves keep ready for situations like this. It's covered in Christmas lights (because of course it is), and it even has an experimental antenna that should be able to track the keys if you can boost its signal strength high enough; there's a little meter that indicates the antenna's signal strength by displaying 0-50 stars.</p>
-<p>Your instincts tell you that in order to save Christmas, you'll need to get all fifty stars by December 25th.</p>
-<p>Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!</p>
-<p>As the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.</p>
-<p>For example, suppose you had the following report:</p>
-<p>199
-200
-208
-210
-200
-207
-240
-269
-260
-263
-This report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.</p>
-<p>The first order of business is to figure out how quickly the depth increases, just so you know what you're dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.</p>
-<p>To do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:</p>
+<h2 id="Sonar-Sweep">Sonar Sweep<a class="anchor-link" href="#Sonar-Sweep">&#182;</a></h2><p>view the <a href="https://adventofcode.com/2021/day/1">Advent of Code 2021 Day 1 challenge</a></p>
 
 </div>
 </div>
@@ -14030,7 +14011,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[55]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Setup - load any packages</span>
@@ -14050,7 +14031,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[56]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;day1_data.txt&#39;</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
@@ -14071,7 +14052,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[42]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[56]:</div>
 
 
 
@@ -14095,7 +14076,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[57]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a numpy array</span>
@@ -14142,7 +14123,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare each of the elements in data array to see if it is greater than the element in data2 array</span>
@@ -14180,7 +14161,7 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[58]:</div>
 
 
 
@@ -14198,112 +14179,13 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h2><p>Considering every single measurement isn't as useful as you expected: there's just too much noise in the data.</p>
-<p>Instead, consider sums of a three-measurement sliding window. Again considering the above example:</p>
-<table>
-<thead><tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>199</td>
-<td>A</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>210</td>
-<td>A</td>
-<td>B</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>208</td>
-<td>A</td>
-<td>B</td>
-<td>C</td>
-<td></td>
-</tr>
-<tr>
-<td>210</td>
-<td></td>
-<td>B</td>
-<td>C</td>
-<td>D</td>
-</tr>
-<tr>
-<td>200</td>
-<td>E</td>
-<td></td>
-<td>C</td>
-<td>D</td>
-</tr>
-<tr>
-<td>207</td>
-<td>E</td>
-<td>F</td>
-<td></td>
-<td>D</td>
-</tr>
-<tr>
-<td>240</td>
-<td>E</td>
-<td>F</td>
-<td>G</td>
-<td></td>
-</tr>
-<tr>
-<td>269</td>
-<td></td>
-<td>F</td>
-<td>G</td>
-<td>H</td>
-</tr>
-<tr>
-<td>260</td>
-<td></td>
-<td></td>
-<td>G</td>
-<td>H</td>
-</tr>
-<tr>
-<td>263</td>
-<td></td>
-<td></td>
-<td></td>
-<td>H</td>
-</tr>
-</tbody>
-</table>
-<p>Start by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.</p>
-<p>Your goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren't enough measurements left to create a new three-measurement sum.</p>
-<p>In the above example, the sum of each three-measurement window is as follows:</p>
-<ul>
-<li>A: 607 (N/A - no previous sum)</li>
-<li>B: 618 (increased)</li>
-<li>C: 618 (no change)</li>
-<li>D: 617 (decreased)</li>
-<li>E: 647 (increased)</li>
-<li>F: 716 (increased)</li>
-<li>G: 769 (increased)</li>
-<li>H: 792 (increased)</li>
-</ul>
-<p>In this example, there are 5 sums that are larger than the previous sum.</p>
-<p>Consider sums of a three-measurement sliding window.</p>
-<p>How many sums are larger than the previous sum?</p>
+<h2 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h2><p>view the <a href="https://adventofcode.com/2021/day/1#part2">Advent of Code 2021 Day 1 challenge Part 2</a></p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[54]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">CompareSonarList</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
