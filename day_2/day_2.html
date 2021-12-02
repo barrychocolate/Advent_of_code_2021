@@ -13982,7 +13982,33 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Challenge">Challenge<a class="anchor-link" href="#Challenge">&#182;</a></h2>
+<h2 id="Dive!">Dive!<a class="anchor-link" href="#Dive!">&#182;</a></h2><p>Now, you need to figure out how to pilot this thing.</p>
+<p>It seems like the submarine can take a series of commands like forward 1, down 2, or up 3:</p>
+<p>forward X increases the horizontal position by X units.</p>
+<p>down X increases the depth by X units.</p>
+<p>up X decreases the depth by X units.</p>
+<p>Note that since you're on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.</p>
+<p>The submarine seems to already have a planned course (your puzzle input). You should probably figure out where it's going. For example:</p>
+<ul>
+<li>forward 5</li>
+<li>down 5</li>
+<li>forward 8</li>
+<li>up 3</li>
+<li>down 8</li>
+<li>forward 2</li>
+</ul>
+<p>Your horizontal position and depth both start at 0. The steps above would then modify them as follows:</p>
+<ul>
+<li>forward 5 adds 5 to your horizontal position, a total of 5.</li>
+<li>down 5 adds 5 to your depth, resulting in a value of 5.</li>
+<li>forward 8 adds 8 to your horizontal position, a total of 13.</li>
+<li>up 3 decreases your depth by 3, resulting in a value of 2.</li>
+<li>down 8 adds 8 to your depth, resulting in a value of 10.</li>
+<li>forward 2 adds 2 to your horizontal position, a total of 15.</li>
+</ul>
+<p>After following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)</p>
+<p>Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?</p>
+
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -13992,10 +14018,12 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Setup - load any packages</span>
+<span class="c1"># Setup - load any packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 
      </div>
@@ -14008,18 +14036,115 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Load-the-data">Load the data<a class="anchor-link" href="#Load-the-data">&#182;</a></h2>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[60]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load data into Pandas DataFrame</span>
+<span class="n">data_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;day2_data.txt&#39;</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Add column names</span>
+<span class="n">data_raw</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">]</span>
+
+<span class="c1"># Check the data types of the columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_raw</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+
+<span class="c1"># set the direction column as the index</span>
+<span class="n">data_raw</span><span class="o">=</span><span class="n">data_raw</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">)</span>
+
+<span class="c1"># View the first few rows of the data</span>
+<span class="n">data_raw</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>direction    object
+distance      int64
+dtype: object
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[60]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>distance</th>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>forward</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>down</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>up</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>forward</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>down</th>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14027,37 +14152,161 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Part-1">Part 1<a class="anchor-link" href="#Part-1">&#182;</a></h1>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[61]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy the raw data for use in part 1</span>
+<span class="n">part1</span><span class="o">=</span><span class="n">data_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># variables to store the distance and depth</span>
+<span class="n">distance</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">depth</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1"># Group by the direction to get the overal distances</span>
+<span class="n">part1</span><span class="o">=</span><span class="n">part1</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;direction&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># view the group by results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">part1</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># set the distance</span>
+<span class="n">distance</span><span class="o">=</span><span class="n">part1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;forward&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># set the depth</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">+</span> <span class="n">part1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;down&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">part1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;up&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;distance = </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s1"> depth = </span><span class="si">{</span><span class="n">depth</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">position</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">*</span> <span class="n">depth</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;answer = </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>           distance
+direction          
+down           1991
+forward        2010
+up              961
+distance = 2010 depth = 1030
+answer = 2070300
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h2>
+<h2 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h2><p>Based on your calculations, the planned course doesn't seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.</p>
+<p>In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:</p>
+<ul>
+<li>down X increases your aim by X units.</li>
+<li>up X decreases your aim by X units.</li>
+<li>forward X does two things:</li>
+<li>It increases your horizontal position by X units.</li>
+<li>It increases your depth by your aim multiplied by X.</li>
+<li>Again note that since you're on a submarine, down and up do the opposite of what you might expect: "down" means aiming in the positive direction.</li>
+</ul>
+<p>Now, the above example does something different:</p>
+<ul>
+<li>forward 5 adds 5 to your horizontal position, a total of 5. Because your aim is 0, your depth does not change.</li>
+<li>down 5 adds 5 to your aim, resulting in a value of 5.</li>
+<li>forward 8 adds 8 to your horizontal position, a total of 13. Because your aim is 5, your depth increases by 8*5=40.</li>
+<li>up 3 decreases your aim by 3, resulting in a value of 2.</li>
+<li>down 8 adds 8 to your aim, resulting in a value of 10.</li>
+<li><ul>
+<li>forward 2 adds 2 to your horizontal position, a total of 15. Because your aim is 10, your depth increases by 2*10=20 to a total of 60.</li>
+</ul>
+</li>
+</ul>
+<p>After following these new instructions, you would have a horizontal position of 15 and a depth of 60. (Multiplying these produces 900.)</p>
+<p>Using this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?</p>
+
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[81]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy the raw data for use in part 2</span>
+<span class="n">part2</span><span class="o">=</span><span class="n">data_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Drop the index</span>
+<span class="n">part2</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># declare variables to store the distance, depth and aim</span>
+<span class="n">p2_dist</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">p2_depth</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">p2_aim</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1"># itterate through each row of directions</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">part2</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;forward&#39;</span><span class="p">):</span>
+        <span class="c1">#increase distance</span>
+        <span class="n">p2_dist</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>
+        
+        <span class="c1"># check aim of submarine</span>
+        <span class="k">if</span> <span class="n">p2_aim</span><span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># not aiming forward so increase/decrease depth by aim</span>
+            <span class="n">p2_depth</span> <span class="o">=</span> <span class="n">p2_depth</span> <span class="o">+</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">p2_aim</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;down&#39;</span><span class="p">):</span>
+        <span class="c1"># increase aim</span>
+        <span class="n">p2_aim</span><span class="o">=</span><span class="n">p2_aim</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;direction&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;up&#39;</span><span class="p">):</span>
+        <span class="c1"># deincrease aim</span>
+        <span class="n">p2_aim</span><span class="o">=</span><span class="n">p2_aim</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>
+        
+<span class="n">p2_position</span> <span class="o">=</span> <span class="n">p2_dist</span> <span class="o">*</span> <span class="n">p2_depth</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;answer = </span><span class="si">{</span><span class="n">p2_position</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>answer = 2078985210
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
