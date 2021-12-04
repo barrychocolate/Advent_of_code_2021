@@ -13992,10 +13992,11 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Setup - load any packages</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 </pre></div>
 
      </div>
@@ -14011,10 +14012,45 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the data</span>
+<span class="n">day4_raw</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;day4_data.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="c1"># extract the numbers called from the first item in the list</span>
+<span class="c1"># pop extracts and removes them from the input</span>
+<span class="n">numbers_called</span> <span class="o">=</span> <span class="n">day4_raw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+<span class="c1">#extract the next row as it is blank</span>
+<span class="n">day4_raw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_bingo_cards</span><span class="p">(</span><span class="n">cards</span><span class="p">):</span>
+    <span class="c1"># card count</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># dictionary to hold all bingo cards</span>
+    <span class="n">bingo_cards</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">#temporary list to hold a single bingo card</span>
+    <span class="n">bingo_card</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1">#for each row in the data</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cards</span><span class="p">:</span>
+        <span class="c1"># check for empty line signalling the start/end of a card</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="c1"># add the current card to the dictionary</span>
+            <span class="n">bingo_cards</span><span class="p">[</span><span class="s1">&#39;card_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)]</span> <span class="o">=</span> <span class="n">bingo_card</span>
+            <span class="c1"># reset the temporary bingo card</span>
+            <span class="n">bingo_card</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># increase card count</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># append the row to the current card</span>
+            <span class="n">bingo_card</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="c1"># return the dictionary of cards</span>
+    <span class="k">return</span> <span class="n">bingo_cards</span>
+
+<span class="c1"># make the bingo cards</span>
+<span class="n">bingo_cards</span> <span class="o">=</span> <span class="n">create_bingo_cards</span><span class="p">(</span><span class="n">day4_raw</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14027,13 +14063,75 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Part-1">Part 1<a class="anchor-link" href="#Part-1">&#182;</a></h1>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">call_numbers</span><span class="p">(</span><span class="n">bingo_cards</span><span class="p">,</span> <span class="n">numbers_called</span><span class="p">,</span> <span class="n">part_one</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># create a temp copy of the bingo cards so we can update them</span>
+    <span class="c1"># Using deepcopy as the dictioanry contains other objects</span>
+    <span class="n">bingo_cards_temp</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">bingo_cards</span><span class="p">)</span>
+    <span class="c1"># create a dictioanry to store the winning cards</span>
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># loop through the numbers called</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers_called</span><span class="p">:</span>
+        <span class="c1">#update each card to mark off the numbers called</span>
+        <span class="k">for</span> <span class="n">card</span><span class="p">,</span> <span class="n">rows</span> <span class="ow">in</span> <span class="n">bingo_cards_temp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#only update cards that haven&#39;t yet won</span>
+            <span class="k">if</span> <span class="n">card</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">winners</span><span class="p">:</span>
+                <span class="c1"># itterate through each row in the card</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                    <span class="c1"># check if number called is in the row</span>
+                    <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                        <span class="c1">#number is in the row so repalce with x</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+                        <span class="c1"># update the row in the card</span>
+                        <span class="n">bingo_cards_temp</span><span class="p">[</span><span class="n">card</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+
+                        <span class="c1"># Check if the card is a winner</span>
+                        <span class="k">if</span> <span class="n">check_winner</span><span class="p">(</span><span class="n">bingo_cards_temp</span><span class="p">[</span><span class="n">card</span><span class="p">]):</span>         
+                            <span class="k">if</span> <span class="n">part_one</span><span class="p">:</span> 
+                                <span class="c1">#The first card has won, calculate the answer and return it</span>
+                                <span class="k">return</span> <span class="n">calculate</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">),</span> <span class="n">bingo_cards_temp</span><span class="p">[</span><span class="n">card</span><span class="p">])</span>
+                            
+                            <span class="c1"># Add the winning card to the winners dictionary</span>
+                            <span class="n">winners</span><span class="p">[</span><span class="n">card</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="n">bingo_cards_temp</span><span class="p">[</span><span class="n">card</span><span class="p">])</span>
+                            
+    <span class="c1"># Return the result of the calculation for the last card in the winners dictionary</span>
+    <span class="k">return</span> <span class="n">winners</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">winners</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">check_winner</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
+    <span class="c1"># copy the card using depcopy so we can alter it to make checking easier</span>
+    <span class="n">card_temp</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+    <span class="c1"># transpose the columns into rows</span>
+    <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">card</span><span class="p">)))</span>
+    <span class="c1"># append the transposed columns as rows</span>
+    <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="n">card_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
+    <span class="c1"># check each row</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">card_temp</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">gotaline</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="c1"># winning line found</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        
+<span class="k">def</span> <span class="nf">gotaline</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="c1"># is the number of x&#39;s the same as the number of items</span>
+    <span class="c1"># Return a boolean list of number ==&#39;x&#39;</span>
+    <span class="c1"># All function returns True if all items are True</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">num</span><span class="o">==</span><span class="s1">&#39;x&#39;</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">row</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">card</span><span class="p">):</span>
+    <span class="c1"># sum the numbers that are not X</span>
+    <span class="n">unmarked_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">card</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">y</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;x&#39;</span><span class="p">])</span>
+    <span class="c1"># multiply the sum by the last number called and return it</span>
+    <span class="k">return</span> <span class="n">unmarked_sum</span><span class="o">*</span><span class="n">num</span>
+
+<span class="c1"># calculate part 1 answer</span>
+<span class="n">p1_answer</span> <span class="o">=</span> <span class="n">call_numbers</span><span class="p">(</span><span class="n">bingo_cards</span><span class="p">,</span> <span class="n">numbers_called</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;answer = </span><span class="si">{</span><span class="n">p1_answer</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14041,11 +14139,69 @@ a.anchor-link {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>answer = 51776
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Part-2">Part 2<a class="anchor-link" href="#Part-2">&#182;</a></h2>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># calculate part 2 answer</span>
+<span class="n">p2_answer</span> <span class="o">=</span> <span class="n">call_numbers</span><span class="p">(</span><span class="n">bingo_cards</span><span class="p">,</span> <span class="n">numbers_called</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;answer = </span><span class="si">{</span><span class="n">p2_answer</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>answer = 16830
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
